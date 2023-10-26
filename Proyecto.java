@@ -1,8 +1,6 @@
 import java.util.Scanner;
 
-// Eliminar de las clases BinaryNode y BinarySearchTree los metodos que no se usan en el codigo
-// Crear las funciones remove, search (meter el codigo en funciones)
-// Pasar a una lista los nombres de los productos en orden y que en el caso 4 los imprima en vez del printInOrder
+
 public class Proyecto {
     public static void main(String[] args) {
         int option;
@@ -30,7 +28,6 @@ public class Proyecto {
                     break;
                case 4:
                     print(tree);
-                    //tree.printInOrder(); // PREGUNTAR
                     break;
                 default:
                     System.out.println("Opcion incorrecta, ingrese otra opcion");
@@ -75,18 +72,18 @@ public class Proyecto {
         String name =" ";
         Scanner console = new Scanner(System.in);
         System.out.println("Ingrese el nombre del producto a borrar");
-                    try{
-                        name = console.next();
-                    }catch (Exception e){
-                        throw new IllegalArgumentException("El nombre debe ser un String");
-                    }
-                    if(tree.find(name) == null){
-                        System.out.println("No se encontro el producto");
-                        throw new IllegalArgumentException();
-                    }else{
-                        tree.remove(name);
-                        System.out.println("Producto removido correctamente");
-                    }
+        try{
+            name = console.next();
+        }catch (Exception e){
+            throw new IllegalArgumentException("El nombre debe ser un String");
+        }
+        if(tree.find(name) == null){
+            System.out.println("No se encontro el producto");
+            //throw new IllegalArgumentException();
+        }else{
+            tree.remove(name);
+            System.out.println("Producto removido correctamente");
+        }
                     
     }
     
@@ -94,28 +91,27 @@ public class Proyecto {
         String name = " ";
         Scanner console = new Scanner(System.in);
         System.out.println("Ingrese el nombre del producto: ");
-                    try{
-                        name = console.next();
-                    }catch(Exception e){
-                        throw new IllegalArgumentException("El nombre debe ser un String");
-                    }
-                    if(tree.find(name) == null)
-                        System.out.println("El producto ingresado anteriormente no existe");
-                    else
-                        System.out.println("Producto: " + tree.find(name) + "\nStock: " + tree.findStock(name));
+        try{
+            name = console.next();
+        }catch(Exception e){
+            throw new IllegalArgumentException("El nombre debe ser un String");
+        }
+        if(tree.find(name) == null)
+            System.out.println("El producto ingresado anteriormente no existe");
+        else
+            System.out.println("Producto: " + tree.find(name) + "\nStock: " + tree.findStock(name));
                                     
     }
 
     public static void print(BinarySearchTree<String> tree){
-       int cantidad;
+        int cantidad = 0;
         QueueList<String> queue = new QueueList<>();
         queue=tree.setInventory(queue);
         cantidad=queue.getContador();
-        for(int i=0; i<cantidad; i++){
-        System.out.println(queue.dequeue());
-        }
+        System.out.println("ID\tNombre\tStock");
+        for(int i=0; i<cantidad; i++)
+            System.out.println(i + "\t" + queue.dequeue());
         
-
     } 
     
 }

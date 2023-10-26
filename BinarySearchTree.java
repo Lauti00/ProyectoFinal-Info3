@@ -5,8 +5,6 @@ public class BinarySearchTree<AnyType extends Comparable <? super AnyType>>
 {
     protected BinaryNode<AnyType> root;
 
-
-
     public BinarySearchTree(){
         root = null;
     }
@@ -22,9 +20,6 @@ public class BinarySearchTree<AnyType extends Comparable <? super AnyType>>
     }
     public AnyType findMin(){
         return elementAt(findMin(root));
-    }
-    public AnyType findMax(){
-        return elementAt(findMax(root));
     }
     public AnyType find (AnyType x){
         return elementAt(find(x,root));
@@ -82,23 +77,6 @@ public class BinarySearchTree<AnyType extends Comparable <? super AnyType>>
     }
 
 
-    public void printInOrder(){
-        if( root != null) root.printInOrder();
-    }
-    
-
-    public void printPreOrder(){
-        if(root != null) root.printPreOrder();
-    }
-
-    /*public void printPreOrder(int n){
-        if(root != null) root.printPreOrder(n);
-    }*/
-
-    public void printPostOrder(){
-        if(root != null) root.printPostOrder();
-    }
-
     protected BinaryNode<AnyType> findMin( BinaryNode<AnyType> t )
     {
         if ( t != null)
@@ -108,13 +86,6 @@ public class BinarySearchTree<AnyType extends Comparable <? super AnyType>>
         return t;
     }
 
-    private BinaryNode<AnyType> findMax( BinaryNode<AnyType> t)
-    {
-        if (t != null)
-            while( t.right != null)
-                t = t.right;
-        return t;
-    }
 
     protected BinaryNode<AnyType> insert (AnyType x, BinaryNode<AnyType> t , int stock)
     {
@@ -135,7 +106,6 @@ public class BinarySearchTree<AnyType extends Comparable <? super AnyType>>
             try {
                 throw new InstanceNotFoundException();
             } catch (InstanceNotFoundException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         } else if ( t.left != null)
@@ -154,7 +124,6 @@ public class BinarySearchTree<AnyType extends Comparable <? super AnyType>>
             try {
                 throw new Exception( x.toString());
             } catch (Exception e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
@@ -187,9 +156,7 @@ public class BinarySearchTree<AnyType extends Comparable <? super AnyType>>
     public void MakeEmpty(){
         root = null;
     }
-    
-    // the only thing that it is missing in this code tree is the function merge()
-    // The function merge() is in the file BinaryTree, all the other functions are in this file
+
     
   
     

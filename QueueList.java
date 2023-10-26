@@ -7,6 +7,10 @@ public class QueueList<AnyType>{
         front = back = null;
     }
 
+    public int getContador(){
+        return contador;
+    }
+
     public void enqueue(AnyType element, int stock) {
         if (isEmpty())
             back = front = new Nodo<AnyType>(element,stock);
@@ -14,9 +18,7 @@ public class QueueList<AnyType>{
             back = back.next = new Nodo<AnyType>(element, stock);
         contador++;
     }
-    public int getContador(){
-        return contador;
-    }
+    
 
     public String dequeue() {
         if (isEmpty()) {
@@ -24,7 +26,6 @@ public class QueueList<AnyType>{
             try {
                 throw new Exception("QueueList getFront");
             } catch (Exception e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             
@@ -32,7 +33,7 @@ public class QueueList<AnyType>{
         AnyType returnValue = front.data;
         int stock= front.stock;
         front = front.next;
-        return "Nombre:"+ returnValue+ "\nStock:" + stock;
+        return returnValue+ "\t" + stock;
 
     }
 
@@ -56,13 +57,5 @@ public class QueueList<AnyType>{
         return front == null;
     }
 
-    public int size() { // No me lo cuenta  idk
-        int count = 0;
-        Nodo<AnyType> actual = this.front;
-        while (actual != null) {
-          count++;
-          actual = actual.next;
-        }
-        return count;
-      }
+    
 }
