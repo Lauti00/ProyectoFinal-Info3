@@ -1,6 +1,3 @@
-
-
-
 public class BinaryNode<AnyType> {
     int bal; // para almacenar el valor del equilibro del nodo
     AnyType element;
@@ -83,7 +80,19 @@ public class BinaryNode<AnyType> {
             root.right = right.duplicate(); // Duplicate; aatach
         return root; // Return resulting tree
     }
+    public QueueList<String> setInventory(QueueList<String>queue){
+        
+        if( left != null){ // left
+            left.setInventory(queue);  
+        }
 
+        queue.enqueue((String) element, stock); // Node
+        if( right != null){
+            right.setInventory(queue); // Right
+        }
+        return queue; 
+    }   
+    
 
     public void printPreOrder(){
         System.out.println(element); // Node

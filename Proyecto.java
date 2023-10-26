@@ -29,7 +29,8 @@ public class Proyecto {
                     search(tree);
                     break;
                case 4:
-                    tree.printInOrder(); // PREGUNTAR
+                    print(tree);
+                    //tree.printInOrder(); // PREGUNTAR
                     break;
                 default:
                     System.out.println("Opcion incorrecta, ingrese otra opcion");
@@ -103,6 +104,18 @@ public class Proyecto {
                     else
                         System.out.println("Producto: " + tree.find(name) + "\nStock: " + tree.findStock(name));
                                     
+    }
+
+    public static void print(BinarySearchTree<String> tree){
+       int cantidad;
+        QueueList<String> queue = new QueueList<>();
+        queue=tree.setInventory(queue);
+        cantidad=queue.getContador();
+        for(int i=0; i<cantidad; i++){
+        System.out.println(queue.dequeue());
+        }
+        
+
     } 
     
 }

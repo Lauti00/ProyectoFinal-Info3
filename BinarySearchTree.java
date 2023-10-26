@@ -76,6 +76,12 @@ public class BinarySearchTree<AnyType extends Comparable <? super AnyType>>
         return null; // Not found
     }
     
+    public QueueList<String> setInventory(QueueList<String> queue){
+        if( root != null) root.setInventory(queue);
+        return queue;
+    }
+
+
     public void printInOrder(){
         if( root != null) root.printInOrder();
     }
