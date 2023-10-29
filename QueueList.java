@@ -11,7 +11,7 @@ public class QueueList<AnyType>{
         return contador;
     }
 
-    public void enqueue(AnyType element, int stock) {
+    public void enqueue(AnyType element, int stock) { // Ingresa element y stock
         if (isEmpty())
             back = front = new Nodo<AnyType>(element,stock);
         else
@@ -22,7 +22,6 @@ public class QueueList<AnyType>{
 
     public String dequeue() {
         if (isEmpty()) {
-            //throw new UnderflowException("QueueList dequeue");
             try {
                 throw new Exception("QueueList getFront");
             } catch (Exception e) {
@@ -33,7 +32,7 @@ public class QueueList<AnyType>{
         AnyType returnValue = front.data;
         int stock= front.stock;
         front = front.next;
-        return returnValue+ "\t" + stock;
+        return returnValue+ "\t" + stock; // Retorna los valores como String
 
     }
 
