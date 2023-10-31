@@ -5,7 +5,6 @@ public class Proyecto {
     public static void main(String[] args) {
         int option;
         int cont = 0;
-       
         Scanner console = new Scanner(System.in);
         BinarySearchTree<String> tree = new BinarySearchTree<String>();
         do {
@@ -47,6 +46,7 @@ public class Proyecto {
             try{
                 System.out.println("Ingrese el nombre del producto");
                 name = input.next();
+                name = name.toLowerCase();
                 if(tree.find(name) == null)
                     flag = true;
                 else
