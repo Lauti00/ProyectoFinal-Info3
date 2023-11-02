@@ -1,31 +1,31 @@
 
 import javax.management.InstanceNotFoundException;
 
-public class BinarySearchTree<AnyType extends Comparable <? super AnyType>> 
+public class BinarySearchTree 
 {
-    protected BinaryNode<AnyType> root;
+    protected BinaryNode root;
 
     public BinarySearchTree(){ // Constructor
         root = null;
     }
 
-    public void insert (AnyType x , int stock){
-        root = insert(x,root,stock);
+    public void insert (Producto x){
+        root = insert(x,root);
     }
-    public void remove (AnyType x){
+    public void remove (Producto x){
         root = remove(x,root);
     }
     public void removeMin(){
         root = removeMin(root);
     }
-    public AnyType findMin(){
+    public Producto findMin(){
         return elementAt(findMin(root));
     }
-    public AnyType find (AnyType x){
+    public Producto find (Producto x){
         return elementAt(find(x,root));
     }
-    public int findStock (AnyType x){
-        return elementAtInt(find(x,root));
+    public String findName (Producto x){
+        return elementAtName(findName(x,root));
     }
     public void makeEmpty(){ // Vacia el arbol binario de busqueda
         root = null;
@@ -34,21 +34,21 @@ public class BinarySearchTree<AnyType extends Comparable <? super AnyType>>
         return root == null; // Si esta vacia retorna true sino false
     }
 
-    private int elementAtInt(BinaryNode<AnyType> t){
-        return t == null ? 0 : t.stock; // Devuelve el elemento stock (Integer)
+    private String elementAtName(BinaryNode t){
+        return t == null ? null : t.element.toString(); // Devuelve el elemento (Producto o String en nuestro caso)
     }
 
-    private AnyType elementAt(BinaryNode<AnyType> t){
-        return t == null ? null : t.element; // Devuelve el elemento (AnyType o String en nuestro caso)
+    private Producto elementAt(BinaryNode t){
+        return t == null ? null : t.element; // Devuelve el elemento (Producto o String en nuestro caso)
     }
 
-    private BinaryNode<AnyType> find(AnyType x, BinaryNode<AnyType> t)
+    private BinaryNode find(Producto x, BinaryNode t)
     {
         while( t != null)
         {
-            if(x.compareTo(t.element) < 0)
+            if(x.getNombre().compareTo(t.element.getNombre()) < 0)
                 t = t.left;
-            else if(x.compareTo(t.element) > 0)
+            else if(x.getNombre().compareTo(t.element.getNombre()) > 0)
                 t = t.right;
             else
                 return t; // Match
@@ -57,13 +57,26 @@ public class BinarySearchTree<AnyType extends Comparable <? super AnyType>>
     }
 
     
-    public QueueList<String> setInventory(QueueList<String> queue){
+    private BinaryNode findName(Producto x, BinaryNode t)
+    {
+        while( t != null)
+        {
+            if(x.getNombre().compareTo(t.element.getNombre()) < 0)
+                t = t.left;
+            else if(x.getNombre().compareTo(t.element.getNombre()) > 0)
+                t = t.right;
+            else
+                return t; // Match
+        }
+        return null; // Not found
+    }
+    public QueueList setInventory(QueueList queue){
         if( root != null) root.setInventory(queue); // Llama a la funcion de la clase BinaryNode mientas root sea != null
         return queue; // Retorna la cola ya ordenada
     }
 
 
-    protected BinaryNode<AnyType> findMin( BinaryNode<AnyType> t )
+    protected BinaryNode findMin( BinaryNode t )
     {
         if ( t != null)
             while( t.left != null)
@@ -73,20 +86,20 @@ public class BinarySearchTree<AnyType extends Comparable <? super AnyType>>
     }
 
 
-    protected BinaryNode<AnyType> insert (AnyType x, BinaryNode<AnyType> t , int stock)
+    protected BinaryNode insert (Producto x, BinaryNode t)
     {
         if ( t == null)
-            t = new BinaryNode<AnyType>(x, stock);
-        else if( x.compareTo(t.element) < 0)
-            t.left = insert(x, t.left , stock); // Compara con todos los nodos del arbol para poder saber donde insertar el nuevo elemento
-        else if( x.compareTo(t.element) > 0)
-            t.right = insert ( x, t.right , stock);
-        else if(x.compareTo(t.element) == 0) // Modificacion para que imprima valores repetidos
-            t.left = insert(x,t.left, stock);       //  Se puede insertar tanto en el sub-arbol izquierdo como en el derecho
+            t = new BinaryNode(x);
+        else if( x.getNombre().compareTo(t.element.getNombre()) < 0)
+            t.left = insert(x, t.left ); // Compara con todos los nodos del arbol para poder saber donde insertar el nuevo elemento
+        else if( x.getNombre().compareTo(t.element.getNombre()) > 0)
+            t.right = insert ( x, t.right );
+        else if(x.getNombre().compareTo(t.element.getNombre()) == 0) // Modificacion para que imprima valores repetidos
+            t.left = insert(x,t.left);       //  Se puede insertar tanto en el sub-arbol izquierdo como en el derecho
         return t;
     }
 
-    protected BinaryNode<AnyType> removeMin( BinaryNode<AnyType> t)
+    protected BinaryNode removeMin( BinaryNode t)
     {
         if ( t == null){ // No puede ser null por lo que arroja error
             try {
@@ -104,7 +117,7 @@ public class BinarySearchTree<AnyType extends Comparable <? super AnyType>>
         return null; // Sino encuentra nada arroja un null
     }
 
-    protected BinaryNode<AnyType> remove ( AnyType x, BinaryNode<AnyType> t)
+    protected BinaryNode remove ( Producto x, BinaryNode t)
     {
         if( t == null){ // t=null -> error (no puede ser null no existe el nodo)
             try {
@@ -113,9 +126,9 @@ public class BinarySearchTree<AnyType extends Comparable <? super AnyType>>
                 e.printStackTrace();
             }
         }
-        if( x.compareTo( t.element ) < 0 ) // Recorre primero el sub-arbol izquierdo para encontrar al nodo
+        if( x.getNombre().compareTo( t.element.getNombre() ) < 0 ) // Recorre primero el sub-arbol izquierdo para encontrar al nodo
             t.left = remove( x, t.left); // Se llama asi misma la funcion hasta que termine el sub-arbol izquierdo
-        else if( x.compareTo( t.element ) > 0) // Recorre el sub-arbol derecho en busca de el nodo a remover
+        else if( x.getNombre().compareTo( t.element.getNombre() ) > 0) // Recorre el sub-arbol derecho en busca de el nodo a remover
             t.right = remove(x, t.right); // ".."
         else if ( t.left != null && t.right != null ) // Two children (En caso que tenga dos hijos)
         {
@@ -131,7 +144,7 @@ public class BinarySearchTree<AnyType extends Comparable <? super AnyType>>
         return BinaryNode.height(root);
     }
 
-    public AnyType getRoot(){ // Devuelve la raiz del arbol binario de busqueda
+    public Producto getRoot(){ // Devuelve la raiz del arbol binario de busqueda
         return root.element;
     }
 

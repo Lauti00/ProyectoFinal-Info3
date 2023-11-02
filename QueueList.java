@@ -1,7 +1,7 @@
-public class QueueList<AnyType>{
+public class QueueList{
     private int contador;
-    private Nodo<AnyType> front;
-    private Nodo<AnyType> back;
+    private Nodo front;
+    private Nodo back;
 
     public QueueList() {
         front = back = null;
@@ -11,11 +11,11 @@ public class QueueList<AnyType>{
         return contador;
     }
 
-    public void enqueue(AnyType element, int stock) { // Ingresa element y stock
+    public void enqueue(Producto element) { // Ingresa element y stock
         if (isEmpty())
-            back = front = new Nodo<AnyType>(element,stock);
+            back = front = new Nodo(element);
         else
-            back = back.next = new Nodo<AnyType>(element, stock);
+            back = back.next = new Nodo(element);
         contador++;
     }
     
@@ -29,14 +29,14 @@ public class QueueList<AnyType>{
             }
             
         }
-        AnyType returnValue = front.data;
-        int stock= front.stock;
+        Producto returnValue = front.data;
+        
         front = front.next;
-        return returnValue+ "\t" + stock; // Retorna los valores como String
+        return returnValue+ "\t"; // Retorna los valores como String
 
     }
 
-    public AnyType getFront() {
+    public Producto getFront() {
         if (isEmpty())
             System.out.println("ERROR");
             try {

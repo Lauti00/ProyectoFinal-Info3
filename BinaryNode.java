@@ -1,61 +1,59 @@
-public class BinaryNode<AnyType> {
+public class BinaryNode {
     int bal; // para almacenar el valor del equilibro del nodo
-    AnyType element;
-    BinaryNode<AnyType> left;
-    BinaryNode<AnyType> right;
-    int stock;
+    Producto element;
+    BinaryNode left;
+    BinaryNode right;
+    
+    public Object nombre;
     
     
-    public BinaryNode (AnyType element , int stock){ // Constructor utilizado por el usuario
-        this.element = element;
-        this.stock = stock;
+    public BinaryNode (Producto element){ // Constructor utilizado por el usuario
+        this.element = element;    
         left = right = null;
     }
 
 
-    public BinaryNode(AnyType theElement, int stock, BinaryNode<AnyType> lt, BinaryNode<AnyType> rt){
+    public BinaryNode(Producto theElement, BinaryNode lt, BinaryNode rt){
        element = theElement;
        left = lt;
        right = rt;
-       this.stock = stock; // Constructor 2 utilizado por el programa
+       
     }
     
-    public int getStock(){ // Devuelve stock
-        return stock;
-    }
+   
 
-    public AnyType getElement(){ // Devuelve el elemento
+    public Producto getElement(){ // Devuelve el elemento
         return element;
     }
     
 
-    public BinaryNode<AnyType> getLeft(){ // Devuelve el nodo izquierdo
+    public BinaryNode getLeft(){ // Devuelve el nodo izquierdo
         return left;
     }
     
 
-    public BinaryNode<AnyType> getRight(){ // Devuelve el nodo derecho
+    public BinaryNode getRight(){ // Devuelve el nodo derecho
         return right;
     }
 
 
-    public void setElement(AnyType x){ // Setea el elemento
+    public void setElement(Producto x){ // Setea el elemento
         element = x;
     }
 
 
-    public void setLeft(BinaryNode<AnyType> t){ // Setea el nodo izquierdo
+    public void setLeft(BinaryNode t){ // Setea el nodo izquierdo
         left = t;
     }
 
 
-    public void setRight(BinaryNode<AnyType> r){ // Setea el nodo derecho
+    public void setRight(BinaryNode r){ // Setea el nodo derecho
         right = r;
     }
 
 
 
-    public static <AnyType> int size(BinaryNode<AnyType> t){ // Devuelve el tamaño 
+    public static  int size(BinaryNode t){ // Devuelve el tamaño 
         if( t==null )
             return 0;
         else
@@ -63,7 +61,7 @@ public class BinaryNode<AnyType> {
     }
 
 
-    public static <AnyType> int height (BinaryNode<AnyType> t){ // Devuelve altura
+    public static  int height (BinaryNode t){ // Devuelve altura
         if( t == null)
             return -1;
         else
@@ -71,8 +69,8 @@ public class BinaryNode<AnyType> {
     }
 
 
-    public BinaryNode<AnyType> duplicate(){ // Si llega a haber un duplicado
-        BinaryNode<AnyType> root = new BinaryNode<AnyType> ( element, stock ,null, null);
+    public BinaryNode duplicate(){ // Si llega a haber un duplicado
+        BinaryNode root = new BinaryNode ( element ,null, null);
         
         if(left != null) // If there's a left subtree
             root.left = left.duplicate(); // Duplicate, attach
@@ -80,13 +78,13 @@ public class BinaryNode<AnyType> {
             root.right = right.duplicate(); // Duplicate; aatach
         return root; // Return resulting tree
     }
-    public QueueList<String> setInventory(QueueList<String>queue){
+    public QueueList setInventory(QueueList queue){
         
         if( left != null){ // left
             left.setInventory(queue);  
         }
 
-        queue.enqueue((String) element, stock); // Node
+        queue.enqueue(element); // Node
         if( right != null){
             right.setInventory(queue); // Right
         }
@@ -117,7 +115,7 @@ public class BinaryNode<AnyType> {
         if( left != null){ // left
             left.printInOrder();  
         }
-        System.out.println(element + "\t" + stock); // Node
+        System.out.println(element + "\t"); // Node
         if( right != null){
             right.printInOrder(); // Right
         } 
