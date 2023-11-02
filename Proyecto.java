@@ -72,6 +72,8 @@ public class Proyecto {
             }else{
                 System.out.println("Ya se ha ingresado un producto con ese nombre...\nDesea agregarle mas stock al producto ? \n(Presione 'y' para aceptar o 'n' para rechazar)");
                 option = input.next().charAt(0);
+                System.out.println("Ingrese la cantidad que desea sumarle al stock");
+                stock = input.nextInt();
                 if(option == 'y'){
                     System.out.println("Producto actualizado correctamente");
                     System.out.println("---------------------------------------------------");
