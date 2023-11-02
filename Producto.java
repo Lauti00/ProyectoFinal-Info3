@@ -38,6 +38,9 @@ public class Producto{
         return id;
     }
 
+    public void changeStock(int x){
+        this.cantidad = cantidad + x;
+    }
     public String toString(){
         return nombre + "\t" + cantidad;
     }

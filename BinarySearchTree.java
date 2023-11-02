@@ -27,6 +27,11 @@ public class BinarySearchTree
     public String findName (Producto x){
         return elementAtName(findName(x,root));
     }
+
+    public String changeStock (Producto x , int stock){
+        return elementAtStock(changeStock(x, root, stock),stock);
+    }
+
     public void makeEmpty(){ // Vacia el arbol binario de busqueda
         root = null;
     }
@@ -36,6 +41,15 @@ public class BinarySearchTree
 
     private String elementAtName(BinaryNode t){
         return t == null ? null : t.element.toString(); // Devuelve el elemento (Producto o String en nuestro caso)
+    }
+
+    private String elementAtStock(BinaryNode t, int stock){
+        if(t==null)
+            return null;
+        else{
+            t.element.changeStock(stock);
+            return t.element.toString();
+        }
     }
 
     private Producto elementAt(BinaryNode t){
@@ -56,7 +70,20 @@ public class BinarySearchTree
         return null; // Not found
     }
 
-    
+    private BinaryNode changeStock(Producto x, BinaryNode t , int stock)
+    {
+        while( t != null)
+        {
+            if(x.getNombre().compareTo(t.element.getNombre()) < 0)
+                t = t.left;
+            else if(x.getNombre().compareTo(t.element.getNombre()) > 0)
+                t = t.right;
+            else
+                return t; // Match
+        }
+        return null;
+    }
+
     private BinaryNode findName(Producto x, BinaryNode t)
     {
         while( t != null)

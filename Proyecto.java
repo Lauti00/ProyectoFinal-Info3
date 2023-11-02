@@ -8,8 +8,10 @@ public class Proyecto {
         Scanner console = new Scanner(System.in);
         BinarySearchTree tree = new BinarySearchTree();
         do {
+            System.out.println("---------------------------------------------------");
             System.out.println("MENU");
             System.out.println("1.Agregar producto\n2.Eliminar Producto\n3.Buscar Producto\n4.Mostrar inventario\n0.Salir");
+            System.out.println("---------------------------------------------------");
             option = console.nextInt();
             switch (option) {
                 case 0:
@@ -31,14 +33,16 @@ public class Proyecto {
                 default:
                     System.out.println("Opcion incorrecta, ingrese otra opcion");
             }
-            System.out.println("Desea continuar con el programa ? \n0-Finalizar programa\n1-Continuar con el programa ");
+            System.out.println("---------------------------------------------------");
+            System.out.println("Desea continuar con el programa ?  \n0-Finalizar programa\n1-Continuar con el programa ");
+            System.out.println("---------------------------------------------------");
             cont = console.nextInt();
         } while (cont == 1);
         console.close();
     }
 
     public static void add(BinarySearchTree tree){
-        
+        char option = ' ';
         String name = " ";
         int stock = 0;
         boolean flag = false;
@@ -58,32 +62,28 @@ public class Proyecto {
                 throw new IllegalArgumentException("El stock tiene que ser entero");
             }
             Producto producto= new Producto(name,stock);
-            if(tree.find(producto) == null)
+            
+            if(tree.find(producto) == null){
+                Producto producto1= new Producto(name,stock);
+                tree.insert(producto1);
+                System.out.println("Producto cargado correctamente");
                 flag = true;
-            else{
-                System.out.println("Nombre de producto ya ingresado");
-        }
-
+                
+            }else{
+                System.out.println("Ya se ha ingresado un producto con ese nombre...\nDesea agregarle mas stock al producto ? \n(Presione 'y' para aceptar o 'n' para rechazar)");
+                option = input.next().charAt(0);
+                if(option == 'y'){
+                    System.out.println("Producto actualizado correctamente");
+                    System.out.println("---------------------------------------------------");
+                    System.out.println("Nombre\tStock");
+                    System.out.println(tree.changeStock(producto, stock));
+                    System.out.println("---------------------------------------------------");
+                    flag = true;
+                }else
+                    break;
+            }
         }while(flag==false);
 
-        /*System.out.println("Ingrese la cantidad de stock del producto");
-        try{
-            stock = input.nextInt();
-        }catch(Exception e){
-            input.close();
-            throw new IllegalArgumentException("El stock tiene que ser entero");
-        }
-        Producto producto= new Producto(name,stock);
-        if(tree.find(producto) == null)
-            flag = true;
-        else{
-            System.out.println("Nombre de producto ya ingresado");
-            System.exit(0);
-        }*/
-        Producto producto1= new Producto(name,stock);
-        tree.insert(producto1);
-        System.out.println("Producto cargado correctamente");
-        //input.close();
     }
     
     public static void remove(BinarySearchTree tree){
@@ -119,9 +119,10 @@ public class Proyecto {
         Producto producto = new Producto(name);
         if(tree.find(producto) == null)
             System.out.println("El producto ingresado anteriormente no existe");
-        else
-            System.out.println("Producto: " + tree.findName(producto));
-                                    
+        else{
+            System.out.println("Nombre\tStock");
+            System.out.println(tree.findName(producto));
+        }                            
     }
 
     public static void print(BinarySearchTree tree){
@@ -129,10 +130,11 @@ public class Proyecto {
         QueueList queue = new QueueList();
         queue=tree.setInventory(queue);
         cantidad=queue.getContador();
+        System.out.println("---------------------------------------------------");
         System.out.println("ID\tNombre\tStock");
         for(int i=0; i<cantidad; i++)
             System.out.println(i + "\t" + queue.dequeue());
-        
+        System.out.println("---------------------------------------------------");
     } 
     
 }
