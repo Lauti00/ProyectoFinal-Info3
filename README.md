@@ -16,3 +16,7 @@
 - Si selecciona la opcion 2 el programa le solicitara que se ingrese el nombre del producto a eliminar , removiendo el producto con sus datos.En el caso de no encontrar el nombre, el programa arrojara un aviso que no existe un producto con dicho nombre.
 - Si se selecciona la opcion 3 , el programa solicitara que se ingrese el nombre del producto que desea buscar, donde una vez encontrado mostrara su nombre con su cantidad de stock; en el caso que no encuentre el nombre, el programa arrojara un aviso que no fue encontrado el producto.
 - Si se selecciona la opcion 4 , el programa mostrara en pantalla todos los productos cargados, mostrando su numero de ID,Stock y Nombre del producto.
+
+## Integrantes
+- @agusclap
+- @Lauti00
