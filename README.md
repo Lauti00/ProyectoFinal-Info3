@@ -1,8 +1,8 @@
 # ProyectoFinal-Info3
 
-Proyecto de la asignatura Informática 3, desarrollado en el lenguaje de programacion Java , mediante la utilizacion del entorno de Visual Studio Code.
-El proyecto consiste en desarrollar un programa que gestione el inventario, en las cuales tiene funcionalidades como agregar producto, eliminar producto, actualizar producto y poder visualizar los productos disponibles.
-Este proyecto fue desarrolado mediante estructuras de datos , donde implementamos una estructura de arbol binario de busqueda, una implementacion de cola con lista enlazada , hicimos utilizacion de funciones recursivas para la insercion, eliminacion y busqueda de los productos.Cabe destacar que para realizar estas funcionalidades fueron de primordial importancia el manejo de excepciones.
+- Proyecto de la asignatura Informática 3, desarrollado en el lenguaje de programacion Java , mediante la utilizacion del entorno de Visual Studio Code.
+- El proyecto consiste en desarrollar un programa que gestione el inventario, en las cuales tiene funcionalidades como agregar producto, eliminar producto, actualizar producto y poder visualizar los productos disponibles.
+- Este proyecto fue desarrolado mediante estructuras de datos , donde implementamos una estructura de arbol binario de busqueda, una implementacion de cola con lista enlazada , hicimos utilizacion de funciones recursivas para la insercion, eliminacion y busqueda de los productos.Cabe destacar que para realizar estas funcionalidades fueron de primordial importancia el manejo de excepciones.
 
 ## Instrucciones: 
 - El usuario una vez ejecutado el programa , se va a encontrar con un menu donde aparecen las siguientes opciones:
