@@ -12,7 +12,11 @@ public class Proyecto {
             System.out.println("MENU");
             System.out.println("1.Agregar producto\n2.Eliminar Producto\n3.Buscar Producto\n4.Mostrar inventario\n0.Salir");
             System.out.println("---------------------------------------------------");
-            option = console.nextInt();
+            try{
+                option = console.nextInt();
+            }catch (Exception e){
+                throw new IllegalArgumentException();
+            }
             switch (option) {
                 case 0:
                     System.out.println("Programa finalizado.");
@@ -20,10 +24,9 @@ public class Proyecto {
                 case 1:
                     add(tree);
                     break;
-                case 2:{
+                case 2:
                     remove(tree);
                     break;
-                    }
                 case 3:
                     search(tree);
                     break;
