@@ -4,7 +4,6 @@ public class BinaryNode {
     BinaryNode left;
     BinaryNode right;
     
-    public Object nombre;
     
     
     public BinaryNode (Producto element){ // Constructor utilizado por el usuario
