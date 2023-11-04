@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Proyecto {
     public static void main(String[] args) {
-        int option;
+        int option = 0;
         int cont = 0;
         Scanner console = new Scanner(System.in);
         BinarySearchTree tree = new BinarySearchTree();
@@ -118,7 +118,9 @@ public class Proyecto {
         }catch(Exception e){
             throw new IllegalArgumentException("El nombre debe ser un String");
         }
+
         Producto producto = new Producto(name);
+        
         if(tree.find(producto) == null)
             System.out.println("El producto ingresado anteriormente no existe");
         else{

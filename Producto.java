@@ -21,12 +21,15 @@ public class Producto{
     public void setNombre(String nom){
         nombre=nom;
     }
+
     public String getNombre(){
         return nombre;
     }
+
     public void setCantidad(int c){
         cantidad=c;
     }
+
     public int getCantidad(){
         return cantidad;
     }
@@ -34,13 +37,15 @@ public class Producto{
     public void setId(int i){
         id=i;
     }
+
     public int getId(){
         return id;
     }
 
-    public void changeStock(int x){
+    public void changeStock(int x){ //Cambia el stock, funcion usada en BinarySearchTree
         this.cantidad = cantidad + x;
     }
+
     public String toString(){
         return nombre + "\t" + cantidad;
     }

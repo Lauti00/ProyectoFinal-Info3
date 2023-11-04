@@ -12,29 +12,33 @@ public class BinarySearchTree
     public void insert (Producto x){
         root = insert(x,root);
     }
+
     public void remove (Producto x){
         root = remove(x,root);
     }
+
     public void removeMin(){
         root = removeMin(root);
     }
     public Producto findMin(){
         return elementAt(findMin(root));
     }
+    
     public Producto find (Producto x){
         return elementAt(find(x,root));
     }
     public String findName (Producto x){
-        return elementAtName(findName(x,root));
+        return elementAtName(find(x,root));
     }
 
     public String changeStock (Producto x , int stock){
-        return elementAtStock(changeStock(x, root, stock),stock);
+        return elementAtStock(find(x, root),stock);
     }
 
     public void makeEmpty(){ // Vacia el arbol binario de busqueda
         root = null;
     }
+    
     public boolean isEmpty(){
         return root == null; // Si esta vacia retorna true sino false
     }
@@ -70,33 +74,6 @@ public class BinarySearchTree
         return null; // Not found
     }
 
-    private BinaryNode changeStock(Producto x, BinaryNode t , int stock)
-    {
-        while( t != null)
-        {
-            if(x.getNombre().compareTo(t.element.getNombre()) < 0)
-                t = t.left;
-            else if(x.getNombre().compareTo(t.element.getNombre()) > 0)
-                t = t.right;
-            else
-                return t; // Match
-        }
-        return null;
-    }
-
-    private BinaryNode findName(Producto x, BinaryNode t)
-    {
-        while( t != null)
-        {
-            if(x.getNombre().compareTo(t.element.getNombre()) < 0)
-                t = t.left;
-            else if(x.getNombre().compareTo(t.element.getNombre()) > 0)
-                t = t.right;
-            else
-                return t; // Match
-        }
-        return null; // Not found
-    }
     public QueueList setInventory(QueueList queue){
         if( root != null) root.setInventory(queue); // Llama a la funcion de la clase BinaryNode mientas root sea != null
         return queue; // Retorna la cola ya ordenada

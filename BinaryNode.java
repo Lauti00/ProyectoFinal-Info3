@@ -20,38 +20,29 @@ public class BinaryNode {
        
     }
     
-   
-
     public Producto getElement(){ // Devuelve el elemento
         return element;
     }
-    
 
     public BinaryNode getLeft(){ // Devuelve el nodo izquierdo
         return left;
     }
-    
 
     public BinaryNode getRight(){ // Devuelve el nodo derecho
         return right;
     }
 
-
     public void setElement(Producto x){ // Setea el elemento
         element = x;
     }
-
 
     public void setLeft(BinaryNode t){ // Setea el nodo izquierdo
         left = t;
     }
 
-
     public void setRight(BinaryNode r){ // Setea el nodo derecho
         right = r;
     }
-
-
 
     public static  int size(BinaryNode t){ // Devuelve el tamaño 
         if( t==null )
@@ -60,14 +51,12 @@ public class BinaryNode {
             return 1 + size(t.left) + size(t.right);
     }
 
-
     public static  int height (BinaryNode t){ // Devuelve altura
         if( t == null)
             return -1;
         else
             return 1 + Math.max(height(t.left),height(t.right));
     }
-
 
     public BinaryNode duplicate(){ // Si llega a haber un duplicado
         BinaryNode root = new BinaryNode ( element ,null, null);
@@ -78,6 +67,7 @@ public class BinaryNode {
             root.right = right.duplicate(); // Duplicate; aatach
         return root; // Return resulting tree
     }
+
     public QueueList setInventory(QueueList queue){
         
         if( left != null){ // left
@@ -92,32 +82,4 @@ public class BinaryNode {
     }   
     // Esta funcion realiza la insercion de los elementos en orden y los inserta en la cola
 
-    public void printPreOrder(){
-        System.out.println(element); // Node
-        if(left != null ){
-            left.printPreOrder();  // left
-        }
-        if( right != null ){
-            right.printPreOrder();  // Right
-       }
-    }
-
-    //Print tree rooted at current node using postorder traversal
-    public void printPostOrder(){
-        if(left != null) // left
-            left.printPostOrder();
-        if( right != null) // Right
-            right.printPostOrder();
-        System.out.println(element); // Node
-    }
-    
-    public void printInOrder(){
-        if( left != null){ // left
-            left.printInOrder();  
-        }
-        System.out.println(element + "\t"); // Node
-        if( right != null){
-            right.printInOrder(); // Right
-        } 
-    }    
 }
