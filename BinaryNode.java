@@ -5,7 +5,6 @@ public class BinaryNode {
     BinaryNode right;
     
     
-    
     public BinaryNode (Producto element){ // Constructor utilizado por el usuario
         this.element = element;    
         left = right = null;
