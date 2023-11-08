@@ -4,7 +4,7 @@ public class Proyecto {
     public static void main(String[] args) {
         int option = 0;
         int cont = 0;
-        boolean flag = true;
+        boolean flag = true, flag1 = true;
         Scanner console = new Scanner(System.in);
         BinarySearchTree tree = new BinarySearchTree();
         do {
@@ -12,14 +12,16 @@ public class Proyecto {
             System.out.println("MENU");
             System.out.println("1.Agregar producto\n2.Eliminar Producto\n3.Buscar Producto\n4.Mostrar inventario\n0.Salir");
             System.out.println("---------------------------------------------------");
-            try {
-                option = console.nextInt();
-                flag = true;
-            } catch (Exception e) {
-                System.out.println("ERROR: La opcion no es valida. Intente nuevamente"); // TODO (Tiene que volver a pedirle el usuario la opcion)
-                console.next();
-                continue;
-            }
+            do {
+                try {
+                    option = console.nextInt();
+                    flag1 = false;
+                } catch (Exception e) {
+                    System.out.println("ERROR: La opcion no es valida. Intente nuevamente");
+                    console.next();
+                    continue;
+                }
+            } while (flag1 == true);
             switch (option) {
                 case 0:
                     System.out.println("Programa finalizado.");
@@ -42,14 +44,13 @@ public class Proyecto {
             do {
                 try {
                     System.out.println("---------------------------------------------------");
-                    System.out.println(
-                            "Desea continuar con el programa ?  \n0-Finalizar programa\n1-Continuar con el programa ");
+                    System.out.println("Desea continuar con el programa ?  \n0-Finalizar programa\n1-Continuar con el programa ");
                     System.out.println("---------------------------------------------------");
                     cont = console.nextInt();
                     flag = false;
                 } catch (Exception e) {
                     System.out.println("ERROR: La opcion ingresada no es valida. Intente de nuevo");
-                    console.next();
+                    console.nextLine();
                     continue;
                 }
             } while (flag == true);
@@ -92,8 +93,7 @@ public class Proyecto {
                 System.out.println("Producto cargado correctamente");
                 flag = true;
             } else {
-                System.out.println(
-                        "Ya se ha ingresado un producto con ese nombre...\nDesea agregarle más stock al producto ? \n(Presione 'y' para aceptar o 'n' para rechazar)");
+                System.out.println("Ya se ha ingresado un producto con ese nombre...\nDesea agregarle más stock al producto ? \n(Presione 'y' para aceptar o 'n' para rechazar)");
                 option = input.next().charAt(0);
                 if (option == 'y') {
                     try {
@@ -125,9 +125,9 @@ public class Proyecto {
         boolean flag = false;
         do {
             try {
-                System.out.println("Desea remover el producto o descontar stock ? y (Remover) / n (Descontar)");
+                System.out.println("Desea remover el producto o descontar stock ?\n(Presione 'y' para remover producto / Presione 'n' para descontar stock)");
                 option = console.next().charAt(0);
-                System.out.println("Ingrese el nombre del producto a borrar");
+                System.out.println("Ingrese el nombre del producto:");
                 name = console.next();
             } catch (Exception e) {
                 System.out.println("El nombre debe ser un String válido. Intente nuevamente.");
@@ -151,9 +151,9 @@ public class Proyecto {
                     try {
                         System.out.println("Ingrese la cantidad de stock a descontar");
                         stock = console.nextInt();
-                        if(stock > tree.findStock(producto, stock))
+                        if (stock > tree.findStock(producto, stock))
                             System.out.println("La cantidad ingresada es mayor a la cantidad de stock del producto");
-                        else{
+                        else {
                             stock = -stock;
                             System.out.println("Producto actualizado correctamente");
                             System.out.println("---------------------------------------------------");
@@ -163,6 +163,8 @@ public class Proyecto {
                         }
                     } catch (Exception e) {
                         System.out.println("ERROR: La cantidad tiene que ser un numero entero");
+                        console.nextLine();
+                        continue;
                     }
                     flag = true;
                 }
@@ -172,16 +174,18 @@ public class Proyecto {
     }
 
     public static void search(BinarySearchTree tree) {
-        do { // DUDA si no ingresa nada y viene aca no hay forma de escape
-            String name = " ";
-            Scanner console = new Scanner(System.in);
+        String name = " ";
+        Scanner console = new Scanner(System.in);
+        char option = ' ';
+        boolean flag = true;
+        do {
 
             System.out.println("Ingrese el nombre del producto: ");
             try {
                 name = console.next();
             } catch (Exception e) {
                 System.out.println("El nombre debe ser un String válido. Intente nuevamente.");
-                console.nextLine(); 
+                console.nextLine();
                 break;
             }
 
@@ -190,11 +194,16 @@ public class Proyecto {
             if (tree.find(producto) == null)
                 System.out.println("El producto ingresado anteriormente no existe");
             else {
+                System.out.println("---------------------------------------------------");
                 System.out.println("Nombre\tStock");
                 System.out.println(tree.findName(producto));
+                System.out.println("---------------------------------------------------");
                 break;
             }
-        } while (true);
+            System.out.println(
+                    "No ha ingresado un nombre que pertenezca al inventario. Desea continuar ?\n(Presione 'y' si desea continuar / Presione cualquier otra letra para salir de esta opcion)");
+            option = console.next().charAt(0);
+        } while (option == 'y' || option == 'Y');
     }
 
     public static void print(BinarySearchTree tree) {
