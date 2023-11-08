@@ -1,10 +1,10 @@
 import java.util.Scanner;
 
-
 public class Proyecto {
     public static void main(String[] args) {
         int option = 0;
         int cont = 0;
+        boolean flag = true;
         Scanner console = new Scanner(System.in);
         BinarySearchTree tree = new BinarySearchTree();
         do {
@@ -12,10 +12,13 @@ public class Proyecto {
             System.out.println("MENU");
             System.out.println("1.Agregar producto\n2.Eliminar Producto\n3.Buscar Producto\n4.Mostrar inventario\n0.Salir");
             System.out.println("---------------------------------------------------");
-            try{
+            try {
                 option = console.nextInt();
-            }catch (Exception e){
-                throw new IllegalArgumentException();
+                flag = true;
+            } catch (Exception e) {
+                System.out.println("ERROR: La opcion no es valida. Intente nuevamente"); // TODO (Tiene que volver a pedirle el usuario la opcion)
+                console.next();
+                continue;
             }
             switch (option) {
                 case 0:
@@ -30,27 +33,36 @@ public class Proyecto {
                 case 3:
                     search(tree);
                     break;
-               case 4:
+                case 4:
                     print(tree);
                     break;
                 default:
                     System.out.println("Opcion incorrecta, ingrese otra opcion");
             }
-            System.out.println("---------------------------------------------------");
-            System.out.println("Desea continuar con el programa ?  \n0-Finalizar programa\n1-Continuar con el programa ");
-            System.out.println("---------------------------------------------------");
-            cont = console.nextInt();
+            do {
+                try {
+                    System.out.println("---------------------------------------------------");
+                    System.out.println(
+                            "Desea continuar con el programa ?  \n0-Finalizar programa\n1-Continuar con el programa ");
+                    System.out.println("---------------------------------------------------");
+                    cont = console.nextInt();
+                    flag = false;
+                } catch (Exception e) {
+                    System.out.println("ERROR: La opcion ingresada no es valida. Intente de nuevo");
+                    console.next();
+                    continue;
+                }
+            } while (flag == true);
         } while (cont == 1);
-        console.close();
     }
 
-    public static void add(BinarySearchTree tree){
+    public static void add(BinarySearchTree tree) {
         char option = ' ';
         String name = " ";
         int stock = 0;
         boolean flag = false;
         Scanner input = new Scanner(System.in);
-        
+
         do {
             try {
                 System.out.println("Ingrese el nombre del producto");
@@ -58,46 +70,53 @@ public class Proyecto {
                 name = name.toLowerCase();
             } catch (Exception e) {
                 System.out.println("El nombre debe ser un String válido. Intente nuevamente.");
-                input.nextLine();  // Limpiar el búfer de entrada
-                continue;  // Volver al principio del bucle para ingresar un valor válido
+                input.nextLine(); // Limpiar el búfer de entrada
+                continue; // Volver al principio del bucle para ingresar un valor válido
             }
-    
+
             System.out.println("Ingrese la cantidad de stock del producto");
-            
+
             try {
                 stock = input.nextInt();
             } catch (Exception e) {
                 System.out.println("El stock debe ser un número entero. Intente nuevamente.");
-                input.nextLine();  // Limpiar el búfer de entrada
-                continue;  // Volver al principio del bucle para ingresar un valor válido
+                input.nextLine(); // Limpiar el búfer de entrada
+                continue; // Volver al principio del bucle para ingresar un valor válido
             }
-            
+
             Producto producto = new Producto(name, stock);
-    
+
             if (tree.find(producto) == null) {
                 Producto producto1 = new Producto(name, stock);
                 tree.insert(producto1);
                 System.out.println("Producto cargado correctamente");
                 flag = true;
             } else {
-                System.out.println("Ya se ha ingresado un producto con ese nombre...\nDesea agregarle más stock al producto ? \n(Presione 'y' para aceptar o 'n' para rechazar)");
+                System.out.println(
+                        "Ya se ha ingresado un producto con ese nombre...\nDesea agregarle más stock al producto ? \n(Presione 'y' para aceptar o 'n' para rechazar)");
                 option = input.next().charAt(0);
                 if (option == 'y') {
-                    System.out.println("Ingrese la cantidad que desea sumarle al stock");
-                    stock = input.nextInt();
-                    System.out.println("Producto actualizado correctamente");
-                    System.out.println("---------------------------------------------------");
-                    System.out.println("Nombre\tStock");
-                    System.out.println(tree.changeStock(producto, stock));
-                    System.out.println("---------------------------------------------------");
-                    flag = true;
+                    try {
+                        System.out.println("Ingrese la cantidad que desea sumarle al stock");
+                        stock = input.nextInt();
+                        System.out.println("Producto actualizado correctamente");
+                        System.out.println("---------------------------------------------------");
+                        System.out.println("Nombre\tStock");
+                        System.out.println(tree.changeStock(producto, stock));
+                        System.out.println("---------------------------------------------------");
+                        flag = true;
+                    } catch (Exception e) {
+                        System.out.println("ERROR: La cantidad tiene que ser un numero entero");
+                        input.next();
+                        continue;
+                    }
                 } else {
                     break;
                 }
             }
         } while (!flag);
     }
-    
+
     public static void remove(BinarySearchTree tree) {
         String name = " ";
         Scanner console = new Scanner(System.in);
@@ -106,83 +125,86 @@ public class Proyecto {
         boolean flag = false;
         do {
             try {
-                System.out.println("Ingrese el nombre del producto a borrar");
-                name = console.next();
                 System.out.println("Desea remover el producto o descontar stock ? y (Remover) / n (Descontar)");
                 option = console.next().charAt(0);
-                
+                System.out.println("Ingrese el nombre del producto a borrar");
+                name = console.next();
             } catch (Exception e) {
                 System.out.println("El nombre debe ser un String válido. Intente nuevamente.");
-                console.nextLine();  // Limpiar el búfer de entrada
-                continue;  // Volver al principio del bucle para ingresar un valor válido
+                console.nextLine(); // Limpiar el búfer de entrada
+                continue; // Volver al principio del bucle para ingresar un valor válido
             }
             Producto producto = new Producto(name);
-            if(option== 'y' || option == 'Y'){
+            if (option == 'y' || option == 'Y') {
                 if (tree.find(producto) == null) {
                     System.out.println("No se encontró el producto. Intente nuevamente.");
                 } else {
                     tree.remove(producto);
                     System.out.println("Producto removido correctamente");
                     flag = true;
-                    break;  // Salir del bucle si se encontró y eliminó el producto
+                    break; // Salir del bucle si se encontró y eliminó el producto
                 }
-            }else if(option == 'n' || option == 'N'){
-                if (tree.find(producto) == null) 
+            } else if (option == 'n' || option == 'N') {
+                if (tree.find(producto) == null)
                     System.out.println("No se encontró el producto. Intente nuevamente.");
-                else{
-                    System.out.println("Ingrese la cantidad de stock a descontar");
-                    stock = console.nextInt();
-                    stock = -stock;
-                    System.out.println("Producto actualizado correctamente");
-                    System.out.println("---------------------------------------------------");
-                    System.out.println("Nombre\tStock");
-                    System.out.println(tree.changeStock(producto, stock));
-                    System.out.println("---------------------------------------------------");
+                else {
+                    try {
+                        System.out.println("Ingrese la cantidad de stock a descontar");
+                        stock = console.nextInt();
+                        stock = -stock;
+                        System.out.println("Producto actualizado correctamente");
+                        System.out.println("---------------------------------------------------");
+                        System.out.println("Nombre\tStock");
+                        System.out.println(tree.changeStock(producto, stock));
+                        System.out.println("---------------------------------------------------");
+                    } catch (Exception e) {
+                        System.out.println("ERROR: La cantidad tiene que ser un numero entero");
+                    }
                     flag = true;
                 }
-            }else
+            } else
                 System.out.println("La opcion ingresada no es valida");
-        } while (flag == false);  // Repetir hasta que se encuentre y elimine el producto
+        } while (flag == false); // Repetir hasta que se encuentre y elimine el producto
     }
-    
-    public static void search(BinarySearchTree tree){
-       do{
+
+    public static void search(BinarySearchTree tree) {
+        do {
             String name = " ";
             Scanner console = new Scanner(System.in);
 
             System.out.println("Ingrese el nombre del producto: ");
-            try{
-            name = console.next();
-            }catch(Exception e){
-            throw new IllegalArgumentException("El nombre debe ser un String");
+            try {
+                name = console.next();
+            } catch (Exception e) {
+                throw new IllegalArgumentException("El nombre debe ser un String");
             }
 
             Producto producto = new Producto(name);
-        
-            if(tree.find(producto) == null)
+
+            if (tree.find(producto) == null)
                 System.out.println("El producto ingresado anteriormente no existe");
-            else{
+            else {
                 System.out.println("Nombre\tStock");
                 System.out.println(tree.findName(producto));
-            break;
+                break;
             }
-        }while(true);                            
+        } while (true);
     }
 
-    public static void print(BinarySearchTree tree){
+    public static void print(BinarySearchTree tree) {
         int cantidad = 0;
         QueueList queue = new QueueList();
-        queue=tree.setInventory(queue);
-        cantidad=queue.getContador();
-        if(cantidad == 0){
+        queue = tree.setInventory(queue);
+        cantidad = queue.getContador();
+        if (cantidad == 0) {
             System.out.println("No ha ingresado ningun elemento");
-        }else{
+        } else {
             System.out.println("---------------------------------------------------");
             System.out.println("ID\tNombre\tStock");
-            for(int i=0; i<cantidad; i++)
+            for (int i = 0; i < cantidad; i++)
                 System.out.println(i + "\t" + queue.dequeue());
             System.out.println("---------------------------------------------------");
         }
-    } 
-    
+    }
+
 }
