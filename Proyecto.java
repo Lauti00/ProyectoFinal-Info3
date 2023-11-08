@@ -182,7 +182,7 @@ public class Proyecto {
 
             System.out.println("Ingrese el nombre del producto: ");
             try {
-                name = console.next();
+                name = console.next().toLowerCase();
             } catch (Exception e) {
                 System.out.println("El nombre debe ser un String válido. Intente nuevamente.");
                 console.nextLine();
