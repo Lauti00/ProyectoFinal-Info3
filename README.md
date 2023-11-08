@@ -18,5 +18,5 @@
 - Si se selecciona la opcion 4 , el programa mostrara en pantalla todos los productos cargados, mostrando su numero de ID,Stock y Nombre del producto.
 
 ## Integrantes
-- @agusclap
-- @Lauti00
+- @agusclap (Agustin Maximo Rodeyro)
+- @Lauti00 (Lautaro Dario Niccolini)
