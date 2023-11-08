@@ -151,12 +151,16 @@ public class Proyecto {
                     try {
                         System.out.println("Ingrese la cantidad de stock a descontar");
                         stock = console.nextInt();
-                        stock = -stock;
-                        System.out.println("Producto actualizado correctamente");
-                        System.out.println("---------------------------------------------------");
-                        System.out.println("Nombre\tStock");
-                        System.out.println(tree.changeStock(producto, stock));
-                        System.out.println("---------------------------------------------------");
+                        if(stock > tree.findStock(producto, stock))
+                            System.out.println("La cantidad ingresada es mayor a la cantidad de stock del producto");
+                        else{
+                            stock = -stock;
+                            System.out.println("Producto actualizado correctamente");
+                            System.out.println("---------------------------------------------------");
+                            System.out.println("Nombre\tStock");
+                            System.out.println(tree.changeStock(producto, stock));
+                            System.out.println("---------------------------------------------------");
+                        }
                     } catch (Exception e) {
                         System.out.println("ERROR: La cantidad tiene que ser un numero entero");
                     }
@@ -168,7 +172,7 @@ public class Proyecto {
     }
 
     public static void search(BinarySearchTree tree) {
-        do {
+        do { // DUDA si no ingresa nada y viene aca no hay forma de escape
             String name = " ";
             Scanner console = new Scanner(System.in);
 
@@ -176,7 +180,9 @@ public class Proyecto {
             try {
                 name = console.next();
             } catch (Exception e) {
-                throw new IllegalArgumentException("El nombre debe ser un String");
+                System.out.println("El nombre debe ser un String válido. Intente nuevamente.");
+                console.nextLine(); 
+                break;
             }
 
             Producto producto = new Producto(name);

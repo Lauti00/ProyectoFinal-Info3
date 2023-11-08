@@ -23,7 +23,9 @@ public class BinarySearchTree
     public Producto findMin(){
         return elementAt(findMin(root));
     }
-    
+    public int findStock(Producto x, int stock){
+        return elementAtInt(find(x,root),stock);
+    }
     public Producto find (Producto x){
         return elementAt(find(x,root));
     }
@@ -53,6 +55,14 @@ public class BinarySearchTree
         else{
             t.element.changeStock(stock);
             return t.element.toString();
+        }
+    }
+    
+    private int elementAtInt(BinaryNode t, int stock){
+        if(t==null)
+            return 0;
+        else{
+            return t.element.getCantidad();
         }
     }
 

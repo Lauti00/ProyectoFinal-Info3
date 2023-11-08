@@ -43,6 +43,9 @@ public class Producto{
     }
 
     public void changeStock(int x){ //Cambia el stock, funcion usada en BinarySearchTree
+        if(x<0 && cantidad + x <= 0){
+            System.out.println("No hay stock suficiente para descontar");
+        }
         this.cantidad = cantidad + x;
     }
 
