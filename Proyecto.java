@@ -142,7 +142,7 @@ public class Proyecto {
                     tree.remove(producto);
                     System.out.println("Producto removido correctamente");
                     flag = true;
-                    break; // Salir del bucle si se encontró y eliminó el producto
+                     
                 }
             } else if (option == 'n' || option == 'N') {
                 if (tree.find(producto) == null)

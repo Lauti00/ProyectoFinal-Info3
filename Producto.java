@@ -12,12 +12,6 @@ public class Producto{
         this.nombre=nombre;
     }
 
-    public Producto(String nombre , int cantidad , int id, float precio){
-        this.nombre=nombre;
-        this.cantidad=cantidad;
-        this.id=id;
-    }
-
     public void setNombre(String nom){
         nombre=nom;
     }
