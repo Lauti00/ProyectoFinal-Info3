@@ -1,5 +1,9 @@
 import java.util.Scanner;
 
+import Utils.BinarySearchTree;
+import Utils.Producto;
+import Utils.QueueList;
+
 public class Proyecto {
     public static void main(String[] args) {
         int option = 0;

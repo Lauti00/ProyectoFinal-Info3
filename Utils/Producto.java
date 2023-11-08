@@ -1,3 +1,4 @@
+package Utils;
 public class Producto{
     private String nombre;
     private int cantidad;
