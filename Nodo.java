@@ -1,4 +1,3 @@
-package Utils;
 public class Nodo {
     Producto data;
     Nodo next;

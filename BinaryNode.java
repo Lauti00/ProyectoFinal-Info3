@@ -1,4 +1,4 @@
-package Utils;
+
 public class BinaryNode {
     int bal; // para almacenar el valor del equilibro del nodo
     Producto element;
